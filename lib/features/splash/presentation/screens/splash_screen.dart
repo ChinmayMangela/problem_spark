@@ -40,7 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppLogo(),
+            AppLogo(
+              width: HelperFunctions.getScreenWidth(context) * 0.22,
+              height: HelperFunctions.getScreenHeight(context) * 0.11,
+            ).animate().rotate(duration: Duration(milliseconds: 800)),
             SizedBox(height: screenHeight * 0.04),
             _buildAppTitle(),
             SizedBox(height: screenHeight * 0.01),
