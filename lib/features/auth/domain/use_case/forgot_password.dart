@@ -3,10 +3,10 @@ import 'package:problem_spark/common/failures/failure.dart';
 import 'package:problem_spark/common/use_case/use_case.dart';
 import 'package:problem_spark/features/auth/domain/repository/auth_repository.dart';
 
-class ForgotPassword implements UseCase<void, ForgotPasswordParameters> {
+class ForgotPasswordUseCase implements UseCase<void, ForgotPasswordParameters> {
   final AuthRepository _authRepository;
 
-  ForgotPassword(this._authRepository);
+  ForgotPasswordUseCase(this._authRepository);
 
   @override
   Future<Either<Failure, void>> call(ForgotPasswordParameters params) async {
