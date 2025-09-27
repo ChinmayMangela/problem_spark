@@ -33,21 +33,18 @@ class TextThemes {
 
 
 class TextWeights {
-  final BuildContext context;
 
-  TextWeights(this.context);
-
-  FontWeight get w900 => FontWeight.w900;
-  FontWeight get w800 => FontWeight.w800;
-  FontWeight get w700 => FontWeight.w700;
-  FontWeight get w600 => FontWeight.w600;
-  FontWeight get w500 => FontWeight.w500;
-  FontWeight get w400 => FontWeight.w400;
-  FontWeight get w300 => FontWeight.w300;
-  FontWeight get w200 => FontWeight.w200;
-  FontWeight get w100 => FontWeight.w100;
-  FontWeight get bold => FontWeight.bold;
-  FontWeight get normal => FontWeight.normal;
+  static FontWeight get w900 => FontWeight.w900;
+  static FontWeight get w800 => FontWeight.w800;
+  static FontWeight get w700 => FontWeight.w700;
+  static FontWeight get w600 => FontWeight.w600;
+  static FontWeight get w500 => FontWeight.w500;
+  static FontWeight get w400 => FontWeight.w400;
+  static FontWeight get w300 => FontWeight.w300;
+  static FontWeight get w200 => FontWeight.w200;
+  static FontWeight get w100 => FontWeight.w100;
+  static FontWeight get bold => FontWeight.bold;
+  static FontWeight get normal => FontWeight.normal;
 }
 
 class Paddings {

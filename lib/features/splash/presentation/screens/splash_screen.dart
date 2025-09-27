@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Text(
       appName,
       style: TextThemes(context).headlineLarge.copyWith(
-        fontWeight: TextWeights(context).w900,
+        fontWeight: TextWeights.w900,
         letterSpacing: 1.4,
       ),
     ).animate().slideY(duration: Duration(milliseconds: 900), begin: 1, end: 0).fade();
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Text(
       appDescription,
       style: TextThemes(context).bodyLarge.copyWith(
-        fontWeight: TextWeights(context).w900,
+        fontWeight: TextWeights.w900,
         letterSpacing: 1.4,
         color: grey,
       ),
@@ -94,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Text(
       loadingText,
       style: TextThemes(context).labelSmall.copyWith(
-        fontWeight: TextWeights(context).w900,
+        fontWeight: TextWeights.w900,
         letterSpacing: 1.4,
         color: grey,
       ),
