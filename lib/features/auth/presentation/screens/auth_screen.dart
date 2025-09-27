@@ -20,19 +20,21 @@ class AuthScreen extends StatelessWidget {
     return Padding(
       padding: Paddings.screenPadding,
       child: Center(
-        child: Column(
-          children: [
-            AppLogo(
-              width: HelperFunctions.getScreenWidth(context) * 0.18,
-              height: HelperFunctions.getScreenHeight(context) * 0.1,
-            ),
-            SizedBox(height: screenHeight * 0.03),
-            _buildHeading(context),
-            SizedBox(height: screenHeight * 0.01),
-            _buildDescription(context),
-            SizedBox(height: screenHeight * 0.03),
-            AuthFormContainer(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppLogo(
+                width: HelperFunctions.getScreenWidth(context) * 0.18,
+                height: HelperFunctions.getScreenHeight(context) * 0.1,
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              _buildHeading(context),
+              SizedBox(height: screenHeight * 0.01),
+              _buildDescription(context),
+              SizedBox(height: screenHeight * 0.03),
+              AuthFormContainer(),
+            ],
+          ),
         ),
       ),
     );

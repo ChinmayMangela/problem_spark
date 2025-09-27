@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:problem_spark/common/dimen.dart';
 
 import '../../features/auth/presentation/widgets/auth_text_field.dart';
 import '../../utils/helper_functions.dart';
@@ -13,7 +14,9 @@ class AuthEmailComponent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Email'),
+        Text('Email', style: TextThemes(context).labelMedium.copyWith(
+          fontWeight: TextWeights.w900
+        ),),
         const SizedBox(height: 7),
         AuthTextField(
           controller: emailController,

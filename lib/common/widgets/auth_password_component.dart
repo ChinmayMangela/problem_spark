@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/auth/presentation/widgets/auth_text_field.dart';
 import '../../utils/helper_functions.dart';
+import '../dimen.dart';
 
 class AuthPasswordComponent extends StatelessWidget {
   const AuthPasswordComponent({super.key, required this.passwordController, required this.obscurePassword, required this.onTogglePasswordState});
@@ -15,7 +16,9 @@ class AuthPasswordComponent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Password'),
+        Text('Password', style: TextThemes(context).labelMedium.copyWith(
+            fontWeight: TextWeights.w900
+        ),),
         const SizedBox(height: 7),
         AuthTextField(
           controller: passwordController,
