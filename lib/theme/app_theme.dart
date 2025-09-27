@@ -7,6 +7,6 @@ class AppTheme {
   static ThemeData get appTheme => ThemeData(
     scaffoldBackgroundColor: white,
     brightness: Brightness.light,
-    textTheme: GoogleFonts.latoTextTheme(),
+    textTheme: GoogleFonts.poppinsTextTheme(),
   );
 }

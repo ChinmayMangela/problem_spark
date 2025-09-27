@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:problem_spark/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:problem_spark/features/splash/presentation/screens/splash_screen.dart';
 import 'package:problem_spark/theme/app_theme.dart';
 
@@ -15,10 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: MaterialApp(
+      routes: _routes,
       theme: AppTheme.appTheme,
       navigatorKey: navigatorKey,
       scaffoldMessengerKey: messengerKey,
       home: SplashScreen(),
     ));
   }
+
+  Map<String, WidgetBuilder> get _routes => {
+    '/signUp': (context) => SignUpScreen(),
+  };
 }
