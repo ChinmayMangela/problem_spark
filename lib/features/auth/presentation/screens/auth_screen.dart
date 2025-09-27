@@ -27,7 +27,7 @@ class AuthScreen extends StatelessWidget {
                 width: HelperFunctions.getScreenWidth(context) * 0.18,
                 height: HelperFunctions.getScreenHeight(context) * 0.1,
               ),
-              SizedBox(height: screenHeight * 0.03),
+              SizedBox(height: screenHeight * 0.02),
               _buildHeading(context),
               SizedBox(height: screenHeight * 0.01),
               _buildDescription(context),

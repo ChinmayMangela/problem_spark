@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:problem_spark/common/widgets/auth_confirm_password_component.dart';
 import 'package:problem_spark/common/widgets/auth_email_component.dart';
 import 'package:problem_spark/common/widgets/auth_password_component.dart';
 import 'package:problem_spark/common/widgets/custom_button.dart';
 import 'package:problem_spark/constants/string_constants.dart';
+
+import '../../../../common/dimen.dart';
+import '../../../../utils/helper_functions.dart';
+import 'auth_text_field.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -12,14 +17,28 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  bool _obscurePassword = false;
+  late TextEditingController _confirmPasswordController;
+
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+  final _formKey = GlobalKey<FormState>();
 
 
-  void _onForgotPasswordTap() {}
+  void _onSignUpTap() {
+    if(_formKey.currentState!.validate()) {
+      final name = _nameController.text.trim();
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+      final confirmPassword = _confirmPasswordController.text.trim();
 
-  void _onSignInTap() {}
+      HelperFunctions.showSnackBar(
+        'Name: $name\nEmail: $email\nPassword: $password\nConfirm Password: $confirmPassword'
+      );
+    }
+  }
 
   void _onTogglePasswordState() {
     setState(() {
@@ -27,11 +46,19 @@ class _SignUpFormState extends State<SignUpForm> {
     });
   }
 
+  void _onToggleConfirmPasswordState() {
+    setState(() {
+      _obscureConfirmPassword = !_obscureConfirmPassword;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
   }
 
   @override
@@ -45,19 +72,42 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
+        key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _buildNameComponent(),
+            const SizedBox(height: 15),
             _buildEmailComponent(),
             const SizedBox(height: 15),
             _buildPasswordComponent(),
-            const SizedBox(height: 10),
-            _buildForgotPasswordButton(),
-            const SizedBox(height: 10),
-            CustomButton(label: signIn, onTap: _onSignInTap),
+            const SizedBox(height: 15),
+            _buildConfirmPasswordComponent(),
+            const SizedBox(height: 15),
+            CustomButton(label: signIn, onTap: _onSignUpTap),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildNameComponent() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Name', style: TextThemes(context).labelMedium.copyWith(
+            fontWeight: TextWeights.w900
+        ),),
+        const SizedBox(height: 7),
+        AuthTextField(
+          controller: _nameController,
+          hintText: 'Enter your Name',
+          isPasswordField: false,
+          validator: (value) {
+            return HelperFunctions.nameValidator(value);
+          },
+        ),
+      ],
     );
   }
 
@@ -73,13 +123,12 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  Widget _buildForgotPasswordButton() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: TextButton(
-        onPressed: _onForgotPasswordTap,
-        child: Text('Forgot Password?',),
-      ),
+  Widget _buildConfirmPasswordComponent() {
+    return AuthConfirmPasswordComponent(
+      passwordController: _confirmPasswordController,
+      obscurePassword: _obscureConfirmPassword,
+      onTogglePasswordState: _onToggleConfirmPasswordState,
+      password: _passwordController.text.trim(),
     );
   }
 }

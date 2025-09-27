@@ -47,19 +47,19 @@ class AuthTextField extends StatelessWidget {
     return isPasswordField
         ? IconButton(
             onPressed: onTogglePasswordState,
-            icon: Icon(obscureText ? eyeSlashIcon : eyeIcon, color: grey,),
+            icon: Icon(obscureText ? eyeIcon : eyeSlashIcon, color: grey),
           )
         : null;
   }
 
   Widget? _buildLeadingIcon() {
-    return Icon(isPasswordField ? lockIcon : emailIcon, color: grey,);
+    return Icon(isPasswordField ? lockIcon : emailIcon, color: grey);
   }
 
   OutlineInputBorder _buildBorder() {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none
+      borderSide: BorderSide.none,
     );
   }
 }

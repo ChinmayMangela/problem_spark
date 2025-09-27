@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:problem_spark/common/dimen.dart';
+import 'package:problem_spark/features/auth/presentation/widgets/sign_in_form.dart';
 import 'package:problem_spark/features/auth/presentation/widgets/sign_up_form.dart';
 import 'package:problem_spark/features/auth/presentation/widgets/toggle_button.dart';
 import 'package:problem_spark/utils/helper_functions.dart';
@@ -27,15 +28,15 @@ class _AuthFormContainerState extends State<AuthFormContainer> {
   Widget build(BuildContext context) {
     final width = HelperFunctions.getScreenWidth(context);
     final height = HelperFunctions.getScreenWidth(context);
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        height: height * 1.2,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: CustomRadius.textFieldRadius,
-          border: Border.all(color: grey, width: 0.4)
-        ),
+    return Container(
+      padding: const EdgeInsets.all(10),
+      height: height * 1.2,
+      width: width,
+      decoration: BoxDecoration(
+        borderRadius: CustomRadius.textFieldRadius,
+        border: Border.all(color: grey, width: 0.4)
+      ),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             _buildGetStartedMessage(),
@@ -44,7 +45,7 @@ class _AuthFormContainerState extends State<AuthFormContainer> {
             SizedBox(height: height * 0.02),
             _buildToggleButton(),
             SizedBox(height: height * 0.05),
-            SignUpForm(),
+            _isSignInSelected ? SignInForm() : SignUpForm(),
           ],
         ),
       ),
