@@ -3,6 +3,7 @@ import 'package:problem_spark/common/widgets/auth_email_component.dart';
 import 'package:problem_spark/common/widgets/auth_password_component.dart';
 import 'package:problem_spark/common/widgets/custom_button.dart';
 import 'package:problem_spark/constants/string_constants.dart';
+import 'package:problem_spark/main.dart';
 
 import '../../../../utils/helper_functions.dart';
 
@@ -19,17 +20,16 @@ class _SignInFormState extends State<SignInForm> {
   bool _obscurePassword = false;
   final _formKey = GlobalKey<FormState>();
 
-
-  void _onForgotPasswordTap() {}
+  void _onForgotPasswordTap() {
+    navigatorKey.currentState!.pushNamed('/forgotPassword');
+  }
 
   void _onSignUpTap() {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
-      HelperFunctions.showSnackBar(
-          'Email: $email\nPassword: $password'
-      );
+      HelperFunctions.showSnackBar('Email: $email\nPassword: $password');
     }
   }
 
@@ -91,7 +91,7 @@ class _SignInFormState extends State<SignInForm> {
       alignment: Alignment.centerRight,
       child: TextButton(
         onPressed: _onForgotPasswordTap,
-        child: Text('Forgot Password?',),
+        child: Text('Forgot Password?'),
       ),
     );
   }
