@@ -5,6 +5,7 @@ import 'package:problem_spark/constants/string_constants.dart';
 import 'package:problem_spark/features/splash/presentation/widgets/app_logo.dart';
 
 import '../../../../utils/helper_functions.dart';
+import '../widgets/auth_form.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -29,6 +30,8 @@ class AuthScreen extends StatelessWidget {
             _buildHeading(context),
             SizedBox(height: screenHeight * 0.01),
             _buildDescription(context),
+            SizedBox(height: screenHeight * 0.03),
+            AuthForm(),
           ],
         ),
       ),

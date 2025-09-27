@@ -8,4 +8,7 @@ const String authScreenTitle = 'Welcome to Problem Spark';
 const String authScreenDescription = 'Sign in to access your problem statement workspace';
 
 const String getStartedMessage = 'Get Started';
-const String accountCreationMessage = 'Create an account or sign inn to continue';
+const String accountCreationMessage = 'Create an account or sign in to continue';
+
+const String signIn = 'Sign In';
+const String signUp = 'Sign Up';
