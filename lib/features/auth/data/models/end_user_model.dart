@@ -2,13 +2,15 @@ import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
 
 class EndUserModel extends EndUser {
   const EndUserModel({
+    required super.id,
     required super.name,
     required super.email,
     required super.password,
   });
 
-  factory EndUserModel.fromJson(Map<String, dynamic> data) {
+  factory EndUserModel.fromJson(Map<String, dynamic> data, String id) {
     return EndUserModel(
+      id: id,
       name: data['name'],
       email: data['email'],
       password: data['password'],
@@ -16,12 +18,12 @@ class EndUserModel extends EndUser {
   }
 
   Map<String, dynamic> toJson() {
-    return {'name': name, 'email': email, 'password': password};
+    return {'id': id, 'name': name, 'email': email, 'password': password};
   }
 
-  @override
   EndUserModel copyWith({String? name, String? email, String? password}) {
     return EndUserModel(
+      id: id,
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
@@ -29,5 +31,5 @@ class EndUserModel extends EndUser {
   }
 
   @override
-  List<Object?> get props => [name, email, password];
+  List<Object?> get props => [id, name, email, password];
 }
