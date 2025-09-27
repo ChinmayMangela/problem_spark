@@ -5,6 +5,7 @@ import 'package:problem_spark/features/auth/data/data_source/auth_remote_data_so
 import 'package:problem_spark/features/auth/data/repository/auth_repository.dart';
 import 'package:problem_spark/features/auth/domain/use_case/sign_in_with_email_and_password.dart';
 import 'package:problem_spark/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:problem_spark/features/auth/presentation/screens/auth_gate.dart';
 import 'package:problem_spark/features/auth/presentation/screens/auth_screen.dart';
 import 'package:problem_spark/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:problem_spark/features/splash/presentation/screens/splash_screen.dart';
@@ -68,8 +69,8 @@ class MyApp extends StatelessWidget {
   }
 
   Map<String, WidgetBuilder> get _routes => {
-    '/signUp': (context) => AuthScreen(),
+    '/auth': (context) => AuthScreen(),
     '/home': (context) => HomeScreen(),
-    '/forgotPassword': (context) => ForgetPasswordScreen(),
+    '/authGate': (context) => AuthGate(),
   };
 }

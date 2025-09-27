@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:problem_spark/common/widgets/auth_confirm_password_component.dart';
 import 'package:problem_spark/common/widgets/auth_email_component.dart';
 import 'package:problem_spark/common/widgets/auth_password_component.dart';
@@ -6,11 +7,16 @@ import 'package:problem_spark/common/widgets/custom_button.dart';
 import 'package:problem_spark/constants/string_constants.dart';
 
 import '../../../../common/dimen.dart';
+import '../../../../constants/color_constants.dart';
 import '../../../../utils/helper_functions.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
 import 'auth_text_field.dart';
 
 class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+  const SignUpForm({super.key, required this.isLoading});
+
+  final bool isLoading;
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
@@ -26,17 +32,12 @@ class _SignUpFormState extends State<SignUpForm> {
   bool _obscureConfirmPassword = true;
   final _formKey = GlobalKey<FormState>();
 
-
   void _onSignUpTap() {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       final name = _nameController.text.trim();
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
-      final confirmPassword = _confirmPasswordController.text.trim();
-
-      HelperFunctions.showSnackBar(
-        'Name: $name\nEmail: $email\nPassword: $password\nConfirm Password: $confirmPassword'
-      );
+      context.read<AuthBloc>().add(AuthSignUpRequested(name, email, password));
     }
   }
 
@@ -63,8 +64,10 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -84,7 +87,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const SizedBox(height: 15),
             _buildConfirmPasswordComponent(),
             const SizedBox(height: 15),
-            CustomButton(label: signIn, onTap: _onSignUpTap),
+            _buildSignUpButton()
           ],
         ),
       ),
@@ -95,9 +98,12 @@ class _SignUpFormState extends State<SignUpForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Name', style: TextThemes(context).labelMedium.copyWith(
-            fontWeight: TextWeights.w900
-        ),),
+        Text(
+          'Name',
+          style: TextThemes(
+            context,
+          ).labelMedium.copyWith(fontWeight: TextWeights.w900),
+        ),
         const SizedBox(height: 7),
         AuthTextField(
           controller: _nameController,
@@ -129,6 +135,20 @@ class _SignUpFormState extends State<SignUpForm> {
       obscurePassword: _obscureConfirmPassword,
       onTogglePasswordState: _onToggleConfirmPasswordState,
       password: _passwordController.text.trim(),
+    );
+  }
+
+  Widget _buildSignUpButton() {
+    return CustomButton(
+      onTap: _onSignUpTap,
+      child: widget.isLoading
+          ? CircularProgressIndicator(color: white,)
+          : Text(
+              signUp,
+              style: TextThemes(
+                context,
+              ).labelLarge.copyWith(fontWeight: TextWeights.w900, color: white),
+            ),
     );
   }
 }

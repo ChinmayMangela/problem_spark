@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:problem_spark/common/dimen.dart';
 import 'package:problem_spark/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:problem_spark/utils/helper_functions.dart';
 
 import '../../../../common/widgets/custom_button.dart';
+import '../../../../constants/color_constants.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+  const ForgetPasswordScreen({super.key, required this.isLoading});
+
+  final bool isLoading;
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
@@ -19,6 +25,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   void _onForgotPasswordTap() {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
+
+      context.read<AuthBloc>().add(
+        AuthForgotPasswordRequested(email),
+      );
+
+      FocusScope.of(context).unfocus();
     }
   }
 
@@ -30,8 +42,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     _emailController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,8 +59,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         child: SingleChildScrollView(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AuthTextField(
                   controller: _emailController,
@@ -58,12 +68,24 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     return HelperFunctions.emailValidator(value);
                   },
                 ),
-                SizedBox(height: 20),
-                CustomButton(label: 'Send', onTap: _onForgotPasswordTap),
+                const SizedBox(height: 20),
+               _buildButton(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildButton() {
+    return CustomButton(
+      onTap: _onForgotPasswordTap,
+      child: widget.isLoading ? CircularProgressIndicator(color: white,) : Text(
+        'Send Reset Link',
+        style: TextThemes(
+          context,
+        ).labelLarge.copyWith(fontWeight: TextWeights.w900, color: white),
       ),
     );
   }

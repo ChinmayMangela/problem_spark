@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; // 💡 ADDED
 import 'package:problem_spark/common/widgets/auth_email_component.dart';
 import 'package:problem_spark/common/widgets/auth_password_component.dart';
 import 'package:problem_spark/common/widgets/custom_button.dart';
 import 'package:problem_spark/constants/string_constants.dart';
-import 'package:problem_spark/main.dart';
+import 'package:problem_spark/features/auth/presentation/screens/forget_password_screen.dart';
 
+import '../../../../common/dimen.dart';
+import '../../../../constants/color_constants.dart';
 import '../../../../utils/helper_functions.dart';
+import '../bloc/auth_bloc.dart';
+import '../bloc/auth_event.dart';
 
 class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+  const SignInForm({super.key, required this.isLoading});
+
+  final bool isLoading;
 
   @override
   State<SignInForm> createState() => _SignInFormState();
@@ -17,19 +24,24 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  bool _obscurePassword = false;
+  bool _obscurePassword = true;
   final _formKey = GlobalKey<FormState>();
 
   void _onForgotPasswordTap() {
-    navigatorKey.currentState!.pushNamed('/forgotPassword');
+    HelperFunctions.showSnackBar('Navigating to Forgot Password...');
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ForgetPasswordScreen(isLoading: widget.isLoading),
+      ),
+    );
   }
 
-  void _onSignUpTap() {
+  void _onSignInTap() {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
-      HelperFunctions.showSnackBar('Email: $email\nPassword: $password');
+      context.read<AuthBloc>().add(AuthSignInRequested(email, password));
     }
   }
 
@@ -67,7 +79,7 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(height: 10),
             _buildForgotPasswordButton(),
             const SizedBox(height: 10),
-            CustomButton(label: signIn, onTap: _onSignUpTap),
+            _buildSignInButton(),
           ],
         ),
       ),
@@ -91,8 +103,22 @@ class _SignInFormState extends State<SignInForm> {
       alignment: Alignment.centerRight,
       child: TextButton(
         onPressed: _onForgotPasswordTap,
-        child: Text('Forgot Password?'),
+        child: const Text('Forgot Password?'),
       ),
+    );
+  }
+
+  Widget _buildSignInButton() {
+    return CustomButton(
+      onTap: _onSignInTap,
+      child: widget.isLoading
+          ? CircularProgressIndicator(color: white,)
+          : Text(
+              signIn,
+              style: TextThemes(
+                context,
+              ).labelLarge.copyWith(fontWeight: TextWeights.w900, color: white),
+            ),
     );
   }
 }

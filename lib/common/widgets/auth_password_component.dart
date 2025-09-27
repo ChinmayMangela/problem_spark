@@ -5,11 +5,12 @@ import '../../utils/helper_functions.dart';
 import '../dimen.dart';
 
 class AuthPasswordComponent extends StatelessWidget {
-  const AuthPasswordComponent({super.key, required this.passwordController, required this.obscurePassword, required this.onTogglePasswordState});
+  const AuthPasswordComponent({super.key, required this.passwordController, required this.obscurePassword, required this.onTogglePasswordState, this.isConfirmPasswordComponent});
 
   final TextEditingController passwordController;
   final bool obscurePassword;
   final void Function() onTogglePasswordState;
+  final bool? isConfirmPasswordComponent;
 
   @override
   Widget build(BuildContext context) {
