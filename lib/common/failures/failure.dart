@@ -1,13 +1,7 @@
 
 
-abstract class AppException implements Exception {
+class Failure {
   final String message;
-  final String? code;
 
-  AppException(this.message, {required this.code});
-
-  @override
-  String toString() {
-    return "$runtimeType: $message ${code != null ? 'code: $code' : ''}";
-  }
+  Failure([this.message = 'An unexpected error occurred']);
 }
