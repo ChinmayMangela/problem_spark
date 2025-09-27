@@ -1,10 +1,13 @@
 
 
-import 'package:equatable/equatable.dart';
+abstract class AppException implements Exception {
+  final String message;
+  final String? code;
 
-abstract class AppFailure extends Equatable {
+  AppException(this.message, {required this.code});
 
-  const AppFailure();
   @override
-  List<Object?> get props => [];
+  String toString() {
+    return "$runtimeType: $message ${code != null ? 'code: $code' : ''}";
+  }
 }
