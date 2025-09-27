@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "755728167237",
+    "project_id": "problem-spark",
+    "storage_bucket": "problem-spark.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755728167237:android:d7e48163a7fa16611e0e2c",
+        "android_client_info": {
+          "package_name": "com.example.problem_spark"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB66GP_4demYrbGGPvKagYAs9LrvqKeUvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
