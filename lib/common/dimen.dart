@@ -54,3 +54,7 @@ class Paddings {
 
   static EdgeInsets get screenPadding => EdgeInsets.all(16);
 }
+
+class CustomRadius {
+  static BorderRadius get logoRadius => BorderRadius.circular(16);
+}
