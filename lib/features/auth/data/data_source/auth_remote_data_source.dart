@@ -28,7 +28,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   final FirebaseAuth _firebaseAuth;
 
   AuthRemoteDataSourceImpl({FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+    : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   @override
   Future<EndUserModel> get currentUser => throw UnimplementedError();
@@ -51,6 +51,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         name: name,
         email: email,
         password: password,
+        createdAt: DateTime.now(),
       );
       return user;
     } on FirebaseAuthException catch (e) {
@@ -97,25 +98,17 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   @override
   Future<void> signOut() async {
-    try {
-      await _firebaseAuth.signOut();
-    } on FirebaseAuthException catch (e) {
-      throw AuthExceptionMapper.mapFirebaseAuthException(e);
-    } on FormatException catch (e) {
-      throw AuthExceptionMapper.mapFormatException(e);
-    } on SocketException catch (e) {
-      throw AuthExceptionMapper.mapSocketException(e);
-    } catch (e) {
-      throw AuthExceptionMapper.mapGenericException(e);
-    }
+    _tryCatchWrapper(() => _firebaseAuth.signOut());
   }
 
   @override
-  Future<void> forgotPassword({
-    required String email,
-  }) async {
+  Future<void> forgotPassword({required String email}) async {
+    _tryCatchWrapper(() => _firebaseAuth.sendPasswordResetEmail(email: email));
+  }
+
+  Future<T> _tryCatchWrapper<T>(Future<T> Function() firebaseCall) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return await firebaseCall();
     } on FirebaseAuthException catch (e) {
       throw AuthExceptionMapper.mapFirebaseAuthException(e);
     } on FormatException catch (e) {

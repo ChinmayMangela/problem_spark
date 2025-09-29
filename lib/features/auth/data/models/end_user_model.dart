@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
 
 class EndUserModel extends EndUser {
@@ -6,19 +7,28 @@ class EndUserModel extends EndUser {
     required super.name,
     required super.email,
     required super.password,
+    super.createdAt,
   });
 
   factory EndUserModel.fromJson(Map<String, dynamic> data, String id) {
+    final createdAt = data['createdAt'] as Timestamp;
     return EndUserModel(
       id: id,
       name: data['name'],
       email: data['email'],
       password: data['password'],
+      createdAt: createdAt.toDate(),
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'id': id, 'name': name, 'email': email, 'password': password};
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'password': password,
+      'createdAt': createdAt != null ? Timestamp.fromDate(createdAt!) : null,
+    };
   }
 
   EndUserModel copyWith({String? name, String? email, String? password}) {
@@ -27,6 +37,7 @@ class EndUserModel extends EndUser {
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
+      createdAt: createdAt
     );
   }
 
