@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,8 +8,8 @@ import 'package:problem_spark/features/auth/domain/use_case/sign_in_with_email_a
 import 'package:problem_spark/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:problem_spark/features/auth/presentation/screens/auth_gate.dart';
 import 'package:problem_spark/features/auth/presentation/screens/auth_screen.dart';
-import 'package:problem_spark/features/auth/presentation/screens/forget_password_screen.dart';
 import 'package:problem_spark/features/splash/presentation/screens/splash_screen.dart';
+import 'package:problem_spark/features/user_data/data/data_source/user_data_source.dart';
 import 'package:problem_spark/firebase_options.dart';
 import 'package:problem_spark/home_screen.dart';
 import 'package:problem_spark/theme/app_theme.dart';
@@ -23,7 +24,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform
   );
 
-  final authRemoteDataSource = AuthRemoteDataSourceImpl();
+  final userRemoteDataSource = UserRemoteDataSourceImpl(firebaseFirestore: FirebaseFirestore.instance);
+
+  final authRemoteDataSource = AuthRemoteDataSourceImpl(userRemoteDataSource: userRemoteDataSource);
   final authRepository = AuthRepositoryImpl(
     authRemoteDataSource: authRemoteDataSource,
   );

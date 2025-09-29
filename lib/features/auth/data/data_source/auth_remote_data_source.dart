@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:problem_spark/features/auth/data/models/end_user_model.dart';
 import 'package:problem_spark/features/auth/domain/exceptions/auth_exception.dart';
 import 'package:problem_spark/features/auth/domain/exceptions/auth_exception_mapper.dart';
+import 'package:problem_spark/features/user_data/data/data_source/user_data_source.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<EndUserModel> signInWithEmailAndPassword({
@@ -26,9 +27,13 @@ abstract interface class AuthRemoteDataSource {
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   final FirebaseAuth _firebaseAuth;
+  final UserRemoteDataSource _userRemoteDataSource;
 
-  AuthRemoteDataSourceImpl({FirebaseAuth? firebaseAuth})
-    : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  AuthRemoteDataSourceImpl({
+    FirebaseAuth? firebaseAuth,
+    required UserRemoteDataSource userRemoteDataSource,
+  }) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+       _userRemoteDataSource = userRemoteDataSource;
 
   @override
   Future<EndUserModel> get currentUser => throw UnimplementedError();
@@ -53,6 +58,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         password: password,
         createdAt: DateTime.now(),
       );
+      await _userRemoteDataSource.createUserProfile(user: user);
       return user;
     } on FirebaseAuthException catch (e) {
       throw AuthExceptionMapper.mapFirebaseAuthException(e);

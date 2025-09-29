@@ -12,3 +12,12 @@ const String accountCreationMessage = 'Create an account or sign in to continue'
 
 const String signIn = 'Sign In';
 const String signUp = 'Sign Up';
+
+
+
+// BOTTOM NAV BAR LABELS
+const String homeLabel = 'Home';
+const String discoverLabel = 'Discover';
+const String libraryLabel = 'Library';
+const String storeLabel = 'Store';
+const String profileLabel = 'Profile';

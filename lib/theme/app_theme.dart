@@ -11,6 +11,7 @@ class AppTheme {
     textTheme: GoogleFonts.poppinsTextTheme(),
     textButtonTheme: _textButtonTheme,
     elevatedButtonTheme: _elevatedButtonTheme,
+    appBarTheme: _appBarTheme,
   );
 
   static TextButtonThemeData get _textButtonTheme => TextButtonThemeData(
@@ -30,4 +31,8 @@ class AppTheme {
           ),
         ),
       );
+
+  static AppBarTheme get _appBarTheme => AppBarTheme(
+    backgroundColor: Colors.transparent,
+  );
 }
