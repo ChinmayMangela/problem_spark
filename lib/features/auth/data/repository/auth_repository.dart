@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:problem_spark/common/failures/failure.dart';
 import 'package:problem_spark/features/auth/data/data_source/auth_remote_data_source.dart';
-import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
+import 'package:problem_spark/common/entity/end_user.dart';
 
 import '../../domain/repository/auth_repository.dart';
 

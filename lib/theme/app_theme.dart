@@ -12,27 +12,34 @@ class AppTheme {
     textButtonTheme: _textButtonTheme,
     elevatedButtonTheme: _elevatedButtonTheme,
     appBarTheme: _appBarTheme,
+    outlinedButtonTheme: _outlinedButtonTheme
   );
 
-  static TextButtonThemeData get _textButtonTheme => TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: black),
-  );
+  static TextButtonThemeData get _textButtonTheme =>
+      TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: black));
 
   static ElevatedButtonThemeData get _elevatedButtonTheme =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: black,
           foregroundColor: white,
-          textStyle: GoogleFonts.lato(
-            color: white
-          ),
+          textStyle: GoogleFonts.lato(color: white),
           shape: RoundedRectangleBorder(
             borderRadius: CustomRadius.textFieldRadius,
           ),
         ),
       );
 
-  static AppBarTheme get _appBarTheme => AppBarTheme(
-    backgroundColor: Colors.transparent,
-  );
+  static AppBarTheme get _appBarTheme =>
+      AppBarTheme(backgroundColor: Colors.transparent);
+
+  static OutlinedButtonThemeData get _outlinedButtonTheme =>
+      OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: CustomRadius.outlinedButtonRadius
+          ),
+          foregroundColor: black
+        ),
+      );
 }

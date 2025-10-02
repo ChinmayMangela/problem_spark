@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:problem_spark/common/failures/failure.dart';
-import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
+import 'package:problem_spark/common/entity/end_user.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, EndUser>> signInWithEmailAndPassword({

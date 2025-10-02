@@ -36,7 +36,23 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
        _userRemoteDataSource = userRemoteDataSource;
 
   @override
-  Future<EndUserModel> get currentUser => throw UnimplementedError();
+  Future<EndUserModel> get currentUser async {
+    final firebaseUser = _firebaseAuth.currentUser;
+
+    if (firebaseUser == null) {
+      throw AuthException('User isn\'t signed in', code: 'null user');
+    }
+
+    try {
+      final user = await _userRemoteDataSource.getUserProfile(
+        userId: firebaseUser.uid,
+      );
+
+      return user;
+    } catch (e) {
+      throw AuthExceptionMapper.mapGenericException(e);
+    }
+  }
 
   @override
   Future<EndUserModel> signUpWithEmailAndPassword({

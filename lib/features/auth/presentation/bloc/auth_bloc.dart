@@ -14,6 +14,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignOut _signOut;
   final ForgotPasswordUseCase _forgotPassword;
 
+  
+
   AuthBloc({
     required SignInWithEmailAndPassword signInWithEmailAndPassword,
     required SignUpWithEmailAndPassword signUpWithEmailAndPassword,

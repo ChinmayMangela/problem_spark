@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:problem_spark/common/dimen.dart';
 import 'package:problem_spark/constants/color_constants.dart';
 import 'package:problem_spark/constants/icon_constants.dart';
 import 'package:problem_spark/constants/string_constants.dart';
+import 'package:problem_spark/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:problem_spark/features/auth/presentation/bloc/auth_state.dart';
 import 'package:problem_spark/features/credits_store/presentation/screens/credits_store_screen.dart';
 import 'package:problem_spark/features/problem_discover/presentation/screens/problem_discover_screen.dart';
 import 'package:problem_spark/features/problem_library/presentation/screens/problem_library.dart';
@@ -37,21 +40,42 @@ class _TabsState extends State<Tabs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            return _buildAppBar(state);
+          },
+        ),
+      ),
       body: _buildBody(),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(AuthState state) {
+    final userNameFirstCharacter = state is Authenticated
+        ? state.endUser.name[0]
+        : 'C';
     return AppBar(
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 6),
       leading: Padding(
         padding: const EdgeInsets.all(7.0),
-          child: AppLogo(height: 30, width: 30, iconSize: 20,)),
-      title: Text(appName, style: TextThemes(context).titleMedium.copyWith(
-        fontWeight: TextWeights.w900,
-      ),),
-
+        child: AppLogo(height: 30, width: 30, iconSize: 20),
+      ),
+      title: Text(
+        appName,
+        style: TextThemes(
+          context,
+        ).titleLarge.copyWith(fontWeight: TextWeights.w900),
+      ),
+      actions: [
+        Container(
+          padding: const EdgeInsets.all(15),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: grey),
+          child: Text(userNameFirstCharacter),
+        ),
+      ],
     );
   }
 

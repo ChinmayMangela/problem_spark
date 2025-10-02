@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
+import 'package:problem_spark/common/entity/end_user.dart';
 
 class EndUserModel extends EndUser {
   const EndUserModel({

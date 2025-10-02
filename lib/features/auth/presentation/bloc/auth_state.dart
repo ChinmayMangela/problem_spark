@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
+import 'package:problem_spark/common/entity/end_user.dart';
 
 abstract class AuthState extends Equatable {
   const AuthState();

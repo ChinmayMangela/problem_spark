@@ -20,7 +20,7 @@ class AuthScreen extends StatelessWidget {
         body: BlocListener<AuthBloc, AuthState>(listener: (context, state) {
           if (state is Authenticated) {
             HelperFunctions.showSnackBar('Authentication Successful! Welcome.');
-            navigatorKey.currentState!.pushReplacementNamed('/home');
+            navigatorKey.currentState!.pushReplacementNamed('/tabs');
           } else if (state is AuthError) {
             FocusScope.of(context).unfocus();
             HelperFunctions.showSnackBar('Error: ${state.errorMessage}');

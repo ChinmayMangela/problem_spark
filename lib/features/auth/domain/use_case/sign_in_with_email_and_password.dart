@@ -1,7 +1,7 @@
 import 'package:problem_spark/common/failures/failure.dart';
 import 'package:problem_spark/common/use_case/use_case.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:problem_spark/features/auth/domain/entity/end_user.dart';
+import 'package:problem_spark/common/entity/end_user.dart';
 import 'package:problem_spark/features/auth/domain/repository/auth_repository.dart';
 
 class SignInWithEmailAndPassword implements UseCase<EndUser, SignInParameters> {

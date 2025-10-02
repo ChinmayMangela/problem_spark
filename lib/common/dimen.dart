@@ -55,4 +55,5 @@ class Paddings {
 class CustomRadius {
   static BorderRadius get logoRadius => BorderRadius.circular(16);
   static BorderRadius get textFieldRadius => BorderRadius.circular(16);
+  static BorderRadius get outlinedButtonRadius => BorderRadius.circular(10);
 }

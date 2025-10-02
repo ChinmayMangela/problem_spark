@@ -12,6 +12,7 @@ import 'package:problem_spark/features/splash/presentation/screens/splash_screen
 import 'package:problem_spark/features/user_data/data/data_source/user_data_source.dart';
 import 'package:problem_spark/firebase_options.dart';
 import 'package:problem_spark/home_screen.dart';
+import 'package:problem_spark/tabs.dart';
 import 'package:problem_spark/theme/app_theme.dart';
 
 import 'features/auth/domain/use_case/forgot_password.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: _routes,
         theme: AppTheme.appTheme,
         navigatorKey: navigatorKey,
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
 
   Map<String, WidgetBuilder> get _routes => {
     '/auth': (context) => AuthScreen(),
-    '/home': (context) => HomeScreen(),
+    '/tabs': (context) => Tabs(),
     '/authGate': (context) => AuthGate(),
   };
 }

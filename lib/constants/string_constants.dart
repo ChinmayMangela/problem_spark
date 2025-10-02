@@ -21,3 +21,8 @@ const String discoverLabel = 'Discover';
 const String libraryLabel = 'Library';
 const String storeLabel = 'Store';
 const String profileLabel = 'Profile';
+
+
+// HOME SCREEN TEXTS
+const String homeSubtitle = 'Ready to discover and generate\namazing problem statements';
+const String buyCreditsButtonLabel = 'Buy More';
