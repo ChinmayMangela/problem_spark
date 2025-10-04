@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:problem_spark/common/dimen.dart';
+import 'package:problem_spark/common/widgets/custom_button.dart';
 import 'package:problem_spark/common/widgets/custom_outlined_button.dart';
 import 'package:problem_spark/constants/color_constants.dart';
 import 'package:problem_spark/constants/icon_constants.dart';
@@ -19,6 +20,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   void _onBuyMoreTap() {}
 
+  void _onStartDiscoveryTap() {}
+
+  void _onViewLibraryTap() {}
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = HelperFunctions.getScreenHeight(context);
@@ -35,7 +40,11 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: screenHeight * 0.03),
               _buildAvailableCreditsComponent(),
               SizedBox(height: screenHeight * 0.01),
-              _buildBuyCreditButton()
+              _buildBuyCreditButton(),
+              SizedBox(height: screenHeight * 0.03),
+              _buildProblemDiscoveryComponent(),
+              SizedBox(height: screenHeight * 0.03),
+              _buildMyProblemLibraryComponent(),
             ],
           ),
         ),
@@ -92,8 +101,92 @@ class _HomeScreenState extends State<HomeScreen> {
       child: CustomOutlinedButton(
         onTap: _onBuyMoreTap,
         child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Icon(Icons.add), Text(buyCreditsButtonLabel)]),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(Icons.add),
+            Text(
+              buyCreditsButtonLabel,
+              style: TextThemes(
+                context,
+              ).labelLarge.copyWith(fontWeight: TextWeights.w900),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProblemDiscoveryComponent() {
+    return _buildContainerComponent(_onStartDiscoveryTap, true);
+  }
+
+  Widget _buildMyProblemLibraryComponent() {
+    return _buildContainerComponent(_onViewLibraryTap, false);
+  }
+
+  Widget _buildContainerComponent(
+    void Function() onTap,
+    bool isProblemDiscoveryComponent,
+  ) {
+    Color containerColor = isProblemDiscoveryComponent ? babyBlue : babyPurple;
+    Color containerBorderColor = isProblemDiscoveryComponent ? lightBlue : lightPurple;
+    String heading = isProblemDiscoveryComponent
+        ? problemDiscoveryHeading
+        : myProblemLibraryHeading;
+    String description = isProblemDiscoveryComponent
+        ? problemDiscoveryDescription
+        : myProblemLibraryDescription;
+    Color buttonTextColor = isProblemDiscoveryComponent ? white : black;
+    Color buttonColor = isProblemDiscoveryComponent ? blue : white;
+    String buttonLabel = isProblemDiscoveryComponent
+        ? problemDiscoveryButtonLabel
+        : myProblemLibraryButtonLabel;
+
+    IconData buttonIcon = isProblemDiscoveryComponent ? Icons.star_border : Icons.tune;
+
+    return Container(
+      padding: Paddings.componentPadding,
+      width: HelperFunctions.getScreenWidth(context),
+      decoration: BoxDecoration(
+        borderRadius: CustomRadius.containerRadius,
+        border: Border.all(
+          color: containerBorderColor
+        ),
+        color: containerColor,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            heading,
+            style: TextThemes(context).titleLarge.copyWith(
+              fontWeight: TextWeights.w900,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            description,
+            style: TextThemes(
+              context,
+            ).bodyMedium.copyWith(fontWeight: TextWeights.w900, color: grey),
+          ),
+          SizedBox(height: 10),
+          CustomButton(
+            backgroundColor: buttonColor,
+            onTap: onTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(buttonIcon,  fontWeight: FontWeight.w900, color: buttonTextColor, ),
+                Text(buttonLabel, style: TextThemes(context).bodyLarge.copyWith(
+                  fontWeight: TextWeights.w900,
+                  color: buttonTextColor
+                ),),
+                Icon(Icons.arrow_forward_rounded, fontWeight: FontWeight.w900, color: buttonTextColor),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

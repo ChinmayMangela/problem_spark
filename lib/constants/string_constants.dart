@@ -26,3 +26,11 @@ const String profileLabel = 'Profile';
 // HOME SCREEN TEXTS
 const String homeSubtitle = 'Ready to discover and generate\namazing problem statements';
 const String buyCreditsButtonLabel = 'Buy More';
+
+const String problemDiscoveryHeading = 'AI Problem Discovery';
+const String problemDiscoveryDescription = 'Generate problems using AI-Powered web scrapping';
+const String problemDiscoveryButtonLabel = 'Start Discovery';
+
+const String myProblemLibraryHeading = 'My Problem Library';
+const String myProblemLibraryDescription = 'View and manage your generated problems';
+const String myProblemLibraryButtonLabel = 'View Library';

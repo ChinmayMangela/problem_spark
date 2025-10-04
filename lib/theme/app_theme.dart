@@ -12,7 +12,8 @@ class AppTheme {
     textButtonTheme: _textButtonTheme,
     elevatedButtonTheme: _elevatedButtonTheme,
     appBarTheme: _appBarTheme,
-    outlinedButtonTheme: _outlinedButtonTheme
+    outlinedButtonTheme: _outlinedButtonTheme,
+    iconTheme: _iconTheme,
   );
 
   static TextButtonThemeData get _textButtonTheme =>
@@ -42,4 +43,11 @@ class AppTheme {
           foregroundColor: black
         ),
       );
+
+
+  static IconThemeData get _iconTheme => IconThemeData(
+    size: 20,
+    weight: 100,
+  ) ;
+
 }

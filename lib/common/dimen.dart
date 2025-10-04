@@ -50,10 +50,12 @@ class TextWeights {
 class Paddings {
 
   static EdgeInsets get screenPadding => EdgeInsets.all(16);
+  static EdgeInsets get componentPadding => EdgeInsets.all(30);
 }
 
 class CustomRadius {
   static BorderRadius get logoRadius => BorderRadius.circular(16);
   static BorderRadius get textFieldRadius => BorderRadius.circular(16);
   static BorderRadius get outlinedButtonRadius => BorderRadius.circular(10);
+  static BorderRadius get containerRadius => BorderRadius.circular(20);
 }
